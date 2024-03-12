@@ -92,7 +92,7 @@ def main():
 
     metadata = internetarchive.cli.argparser.get_args_dict(args['--metadata'])
 
-    tu = TubeUp(verbose=not quiet_mode,
+    tu = Tube.TubeUp(verbose=not quiet_mode,
                 output_template=args['--output'])
 
     try:
