@@ -59,7 +59,7 @@ import traceback
 import internetarchive
 import internetarchive.cli
 
-from tubeup.TubeUp import TubeUp
+import Tube
 from tubeup import __version__
 
 
