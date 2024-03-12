@@ -10,7 +10,7 @@ import internetarchive
 from internetarchive.config import parse_config_file
 from datetime import datetime
 from yt_dlp import YoutubeDL
-from .utils import (get_itemname, check_is_file_empty,
+from utils import (get_itemname, check_is_file_empty,
                     EMPTY_ANNOTATION_FILE)
 from logging import getLogger
 from urllib.parse import urlparse
@@ -310,6 +310,7 @@ class TubeUp(object):
         return ydl_opts
 
     def upload_ia(self, videobasename, custom_meta=None):
+        print('PPOPP SCOOP')
         """
         Upload video to archive.org.
 
@@ -352,13 +353,13 @@ class TubeUp(object):
 
         # Upload all files with videobase name: e.g. video.mp4,
         # video.info.json, video.srt, etc.
-        files_to_upload = glob.glob(videobasename + '*')
+        #files_to_upload = glob.glob(videobasename + '*')
 
         # Upload the item to the Internet Archive
-        item = internetarchive.get_item(itemname)
+        #item = internetarchive.get_item(itemname)
 
-        if custom_meta:
-            metadata.update(custom_meta)
+        #if custom_meta:
+            #metadata.update(custom_meta)
 
         # Parse internetarchive configuration file.
         parsed_ia_s3_config = parse_config_file(self.ia_config_path)[2]['s3']
@@ -374,10 +375,10 @@ class TubeUp(object):
                 print(msg)
             raise Exception(msg)
 
-        item.upload(files_to_upload, metadata=metadata, retries=9001,
-                    request_kwargs=dict(timeout=9001), delete=True,
-                    verbose=self.verbose, access_key=s3_access_key,
-                    secret_key=s3_secret_key)
+        #item.upload(files_to_upload, metadata=metadata, retries=9001,
+                    #request_kwargs=dict(timeout=9001), delete=True,
+                    #verbose=self.verbose, access_key=s3_access_key,
+                    #secret_key=s3_secret_key)
 
         return itemname, metadata
 
@@ -411,9 +412,9 @@ class TubeUp(object):
         downloaded_file_basenames = self.get_resource_basenames(
             urls, cookie_file, proxy, ydl_username, ydl_password, use_download_archive,
             ignore_existing_item)
-        for basename in downloaded_file_basenames:
-            identifier, meta = self.upload_ia(basename, custom_meta)
-            yield identifier, meta
+        #for basename in downloaded_file_basenames:
+            #identifier, meta = self.upload_ia(basename, custom_meta)
+            #yield identifier, meta
 
     @staticmethod
     def determine_collection_type(url):
